@@ -17,8 +17,8 @@ build/
 # Node modules
 node_modules/
 
-# Tailwind source (not needed in production)
-static/src/
+# Tailwind source - KEEP THIS FOR VERCEL BUILD
+# static/src/
 
 # IDE
 .vscode/
