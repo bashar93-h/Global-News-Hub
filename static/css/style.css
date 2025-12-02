@@ -1,0 +1,6 @@
+html,
+body.dark {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f9fafb !important;
+  margin: 0;
+}

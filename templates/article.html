@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Global News Hub</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/output.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-light-main-bg dark:bg-dark-main-bg transition-colors">
+    <div
+      class="flex justify-center bg-gradient-to-r from-purple-500 to-purple-200 py-2"
+    >
+      <a href="{{ url_for('home') }}"
+        ><img src={{url_for('static', filename='img/logo.png')}} class="w-[200px]"
+      /></a>
+    </div>
+    <header
+      class="sticky top-0 z-50 bg-light-header-bg text-light-header-text dark:text-dark-header-text dark:bg-dark-header-bg"
+    >
+    <div class="max-w-7xl mx-auto p-3 flex justify-between">
+        <button class="md:hidden" onclick='toggleMainNavbar()'>
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <nav id='mobile-nav' class="hidden absolute w-[90%] {%  if lang == 'ar' %} right-0 {% else %} left-0 {%endif%} top-full flex flex-col gap-3 p-4 bg-light-header-bg dark:bg-dark-header-bg  ">
+          <a href="/category/world?lang={{ lang }}">
+            <img src={{url_for('static', filename='img/miniLogo.png')}} class="w-[100px]" />
+          </a>
+          <a href="/category/world?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.world}}
+          </a>
+          <a href="/category/sports?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.sports}}
+          </a>
+          <a href="/category/politics?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.politics}}
+          </a>
+          <a href="/category/technology?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.technology}}
+          </a>
+          <a href="/category/entertainment?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.entertainment}}
+          </a>
+          <a href="/category/business?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.business}}
+          </a>
+          <a href="/category/health?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.health}}
+          </a>
+          <a href="/category/science?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.science}}
+          </a>
+          <a href="/category/travel?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.travel}}
+          </a>
+        </nav>
+        <nav class="desktop-nav hidden md:flex gap-10 ">
+          <a href="/category/world?lang={{ lang }}">
+            <img src={{url_for('static', filename='img/miniLogo.png')}} class="w-[100px]" />
+          </a>
+          <a href="/category/world?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.world}}
+          </a>
+          <a href="/category/sports?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.sports}}
+          </a>
+          <a href="/category/politics?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.politics}}
+          </a>
+          <a href="/category/technology?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.technology}}
+          </a>
+          <a href="/category/entertainment?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.entertainment}}
+          </a>
+          <a href="/category/business?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.business}}
+          </a>
+          <a href="/category/health?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.health}}
+          </a>
+          <a href="/category/science?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.science}}
+          </a>
+          <a href="/category/travel?lang={{ lang }}"
+            class="hover:text-yellow-300 dark:hover:text-yellow-400 transition-colors">
+            {{t.travel}}
+          </a>
+        </nav>
+        <div class="flex gap-3 relative">
+          <button onclick="toggleMenu()">
+            <i class="fa-solid fa-language"></i>
+          </button>
+          <div class="absolute top-full">
+            <select
+              id="languagesList"
+              class="hidden bg-purple-600 p-1 focus:outline-none"
+            >
+              <option value="en" {% if lang == 'en'%}selected{%endif%}>{{t.lang_english}}</option>
+              <option value="fr" {% if lang == 'fr'%}selected{%endif%}>{{t.lang_french}}</option>
+              <option value="es" {% if lang == 'es'%}selected{%endif%}>{{t.lang_spanish}}</option>
+              <option value="de" {% if lang == 'de'%}selected{%endif%}>{{t.lang_german}}</option>
+              <option value="ar" {% if lang == 'ar'%}selected{%endif%}>{{t.lang_arabic}}</option>
+            </select>
+          </div>
+          <button id="toggleDarkMode" onclick="toggleDarkMode()">
+            <i class="fa-regular fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+    <form
+      action="{{ url_for('home') }}"
+      method="get"
+      class="flex justify-center my-4"
+    >
+      <div class="w-[70%] lg:w-[700px] relative">
+        <input
+          type="text"
+          name="q"
+          placeholder={{t.search_placeholder}}
+          value="{{ query|default('') }}"
+          class="w-full border border-purple-600 rounded-l-lg p-2 pl-4 focus:outline-none focus:ring-1 focus:ring-blue-400"
+        />
+        <input type="hidden" name="lang" value="{{ lang|default('en') }}" />
+        <button
+          type="submit"
+          class="h-[42px] absolute right-0 top-1/2 -translate-y-1/2 translate-x-full bg-purple-600 rounded-r-lg px-3 hover:scale-[1.05] transition-transform"
+        >
+          <i class="fa-solid fa-magnifying-glass text-white"></i>
+        </button>
+      </div>
+    </form>
+
+    <main class="max-w-4xl mx-auto px-4 py-8 text-light-text-primary dark:text-dark-text-primary">
+        <article class="bg-light-card-bg dark:bg-dark-card-bg rounded-lg overflow-hidden">
+            {% if article.image_url %}
+            <img 
+                src="{{ article.image_url }}"
+                alt="{{article.title}}"
+                class="w-full h-[420px]"
+            />
+            {% endif %}
+            <div class='p-8'>
+                <div class="flex items-center gap-4 text-sm text-light-text-secondary dark:text-dark-text-secondary mb-6">
+                    <span class="flex items-center gap-2">
+                        <i class="fas fa-newspaper"></i>
+                        {{ article.source_id }}
+                    </span>
+                    <span class="flex items-center gap-2">
+                        <i class="fas fa-calendar"></i>
+                        {{ article.pubDate[:10] if article.pubDate else 'Unknow date' }}
+                    </span>
+                    {% if article.author %}
+                    <span class="flex items-center gap-2">
+                        <i class="fas fa-user"></i>
+                        {{ article.author }}
+                    </span>
+                    {% endif %}
+                </div>
+                <h1 class="text-4xl font-bold mb-6 leading-tight">{{article.title}}</h1>
+
+                {%if article.description %}
+                <p class="text-xl text-light-text-secondary dark:text-dark-text-secondary mb-8 leading-relaxed">
+                    {{article.description}}
+                </p>
+                {% endif %}
+
+                {%if article.content %}
+                    {% if '[+' in article.content and 'chars' in article.content %}
+                        <div class="mb-8 text-light-text-secondary dark:text-dark-text-secondary leading-7">
+                            {{article.content|safe}}
+                        </div>
+                        <div class="mb-8 p-4 bg-yellow-100 dark:bg-yellow-900/20 rounded">
+                            <p class="text-sm text-yellow-800 dark:text-yellow-200 ">
+                                {{t.content_limited}}
+                            </p>
+                        </div>       
+                    {% else %}
+                        <div class="mb-8 text-light-text-secondary dark:text-dark-text-secondary leading-7">
+                            {{article.content|safe}}
+                        </div>
+                    {% endif %}
+                {% else %}
+                <div class="mb-8 p-4 bg-yellow-100 dark:bg-yellow-900/20 rounded">
+                    <p class="text-sm text-yellow-800 dark:text-yellow-200 ">
+                        ⚠️ Full content not available from this source. Please click "Read Original" to view the complete article.
+                    </p>
+                </div>
+                {% endif %}
+
+                <div class='border-t border-gray-200 dark:border-gary-700 pt-6'>
+                    <a 
+                        href="{{article.link}}" 
+                        target="_blank" 
+                        rel='noopener noreferrer'
+                        class="inline-flex itmes-center gap-2 px-6 py-3 bg-light-header-bg text-white rounded-lg hover:bg-dark-header-bg transition-colors"
+                        >
+                        <i class="fas fa-external-link-alt"></i>
+                        {{t.read_original}}
+                    </a>
+                </div>
+                <div class="mt-8 border-t border-gray-200 dark:border-gary-700 pt-6">
+                    <h3 class="text-sm font-bold mb-3 text-light-text-secondary dark:text-dark-text-secondary">{{t.share_article}}</h3>
+                    <div class="flex gap-4">
+                        <a 
+                           href="https://twitter.com/intent/tweet?url={{ article.link|urlencode }}&text={{ article.title|urlencode }}" 
+                           target="_blank"
+                           class="text-2xl hover:text-black transition-colors"
+                           >
+                            <i class="fab fa-x"></i>
+                        </a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u={{ article.link|urlencode }}" target="_blank" class="text-2xl hover:text-[#1877f2] transition-colors">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ article.link|urlencode }}" target="_blank" class="text-2xl hover:text-[#0077b5] transition-colors">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://wa.me/?text={{ article.title|urlencode }}%20{{ article.link|urlencode }}" target="_blank" class="text-2xl hover:text-[#25D366] transition-colors">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+
+                    </div>
+                </div>
+                
+                
+            </div>
+        </article>
+    </main>
+
+    <script>  
+      let isToggled = false
+
+      // load theme from localStorage
+      if (localStorage.getItem("theme") === "dark") {
+        document.documentElement.classList.add("dark");
+      }
+    
+
+      function updateIcon() {
+        const btn = document.getElementById("toggleDarkMode");
+
+        if (document.documentElement.classList.contains("dark")) {
+          btn.innerHTML = '<i class="fa-regular fa-sun"></i>';
+        } else {
+          btn.innerHTML = '<i class="fa-regular fa-moon"></i>';
+        }
+      }
+
+      updateIcon();
+
+      function toggleDarkMode() {
+        document.documentElement.classList.toggle("dark");
+
+        if (document.documentElement.classList.contains("dark")) {
+          localStorage.setItem("theme", "dark");
+        } else {
+          localStorage.setItem("theme", "light");
+        }
+        updateIcon();
+      }
+
+      function toggleMainNavbar() {
+        isToggled = !isToggled
+        const navbar = document.getElementById('mobile-nav')
+        if(isToggled) {
+          navbar.style.display = 'flex'
+        }
+        else {
+          navbar.style.display = 'none'
+        }
+      }
+
+      const lang = "{{lang}}"
+      if(lang === 'ar') {
+        document.documentElement.dir = 'rtl'
+      }
+
+    </script>
+  </body>
+</html>
