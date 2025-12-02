@@ -1,4 +1,3 @@
-# Python
 venv/
 __pycache__/
 *.pyc
@@ -16,9 +15,6 @@ build/
 
 # Node modules
 node_modules/
-
-# Tailwind source - KEEP THIS FOR VERCEL BUILD
-# static/src/
 
 # IDE
 .vscode/
