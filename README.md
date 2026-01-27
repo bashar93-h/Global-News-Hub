@@ -1,2 +1,7 @@
+# Global News Hub
+
 ## Demo
-you can view a live demo of the project here: [Global News Hub](https://global-news-hub-mbv9.vercel.app/)
+🌐 Live Demo: [Global News Hub](https://global-news-hub-mbv9.vercel.app/)
+## Portfolio
+👤 Portfolio: https://your-portfolio.vercel.app
+
